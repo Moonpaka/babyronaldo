@@ -41,13 +41,6 @@
       margin-bottom: 16px;
       font-family: 'Dancing Script', cursive;
     }
-    .logo {
-      width: 220px;
-      margin: 20px auto;
-      display: block;
-      border-radius: 20px;
-      box-shadow: 0 0 15px rgba(255,255,255,0.3);
-    }
     .desc {
       font-size: 1.2em;
       color: #eee;
@@ -113,8 +106,27 @@
 </head>
 <body>
   <div class="container">
-    <!-- Ronaldo Cartoon Logo -->
-    <img src="ronaldo-cartoon.png" alt="Baby Ronaldo Cartoon" class="logo">
+    <!-- Inline SVG: Green script-style SIUU logo -->
+    <svg class="logo-svg" viewBox="0 0 900 240" role="img" aria-label="SIUU Logo" style="display:block;margin:18px auto 8px;max-width:700px;width:95%;height:auto;">
+      <defs>
+        <linearGradient id="siuuGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#4cff90"/>
+          <stop offset="50%" stop-color="#00e676"/>
+          <stop offset="100%" stop-color="#00b34a"/>
+        </linearGradient>
+        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="6" result="blur"/>
+          <feMerge>
+            <feMergeNode in="blur"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+      </defs>
+      <rect x="0" y="0" width="100%" height="100%" fill="none"/>
+      <g filter="url(#glow)">
+        <text x="50%" y="62%" text-anchor="middle" font-family="'Dancing Script', cursive" font-size="170" font-weight="700" fill="url(#siuuGrad)" stroke="#00ff88" stroke-width="1.5" paint-order="stroke" style="letter-spacing:4px;">SIUU</text>
+      </g>
+    </svg>
     <div class="subtitle">🚨 The Moonshot You’ve Been Waiting For! 🚨</div>
     <h1>Baby Ronaldo $SIUU ⚽️</h1><p class="desc">🎉 The pump is coming—hold strong, stay patient, it’ll be UNFORGETTABLE! ✨ 1M x soon 🥳</p>
 
