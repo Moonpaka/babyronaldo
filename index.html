@@ -1,137 +1,233 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Baby Ronaldo SIUU</title>
-<style>
-body {
-font-family: Arial, sans-serif;
-max-width: 800px;
-margin: 0 auto;
-padding: 20px;
-background-color: #f5f5f5;
-color: #333;
-}
-h1, h2 {
-color: #e63946;
-}
-.btn {
-display: inline-block;
-background: #ffbb33;
-color: #222;
-padding: 10px 15px;
-margin: 5px;
-border-radius: 5px;
-text-decoration: none;
-font-weight: bold;
-}
-.btn:hover {
-background: #ffaa00;
-}
-ul {
-padding-left: 20px;
-}
-.contract {
-background: #fff;
-padding: 15px;
-border-radius: 8px;
-margin: 20px 0;
-font-family: monospace;
-word-break: break-all;
-}
-.story-block {
-background: #fff;
-padding: 15px;
-border-radius: 8px;
-margin: 20px 0;
-}
-footer {
-margin-top: 40px;
-text-align: center;
-font-size: 0.9em;
-color: #666;
-}
-.ronaldo-cartoon {
-width: 200px;
-height: 200px;
-margin: 20px auto;
-display: block;
-background: #e63946;
-border-radius: 50%;
-position: relative;
-overflow: hidden;
-box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-}
-.ronaldo-cartoon::before {
-content: '';
-position: absolute;
-width: 120px;
-height: 120px;
-background: #f1c40f;
-border-radius: 50%;
-top: 40px;
-left: 40px;
-}
-.ronaldo-cartoon::after {
-content: 'CR';
-position: absolute;
-color: #222;
-font-weight: bold;
-font-size: 40px;
-top: 70px;
-left: 70px;
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Baby Ronaldo SIUU – Noir Terminal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;700&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --stroke: #333;
+      --bg: #080808;
+      --text: #fafafa;
+      --highlight: #ddd;
+      --glow: 0 0 15px rgba(255, 255, 255, 0.25);
+      --glow-hover: 0 0 25px rgba(255, 255, 255, 0.5);
+    }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Fira Mono', monospace;
+      line-height: 1.5;
+      margin: 0;
+      padding: 30px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      filter: grayscale(100%);
+      transition: all 0.5s ease;
+    }
+    body:hover {
+      filter: grayscale(90%);
+    }
+    .container {
+      max-width: 700px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 30px;
+      border: 2px solid var(--stroke);
+      border-radius: 4px;
+      position: relative;
+      background: var(--bg);
+      overflow: hidden;
+    }
+    .container::before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      right: -10px;
+      bottom: -10px;
+      border: 2px solid transparent;
+      border-radius: 8px;
+      z-index: -1;
+      pointer-events: none;
+      animation: glow 3s ease-in-out infinite;
+    }
+    @keyframes glow {
+      0%, 100% { border-color: rgba(255, 255, 255, 0.2); box-shadow: 0 0 15px rgba(255, 255, 255, 0.1); }
+      50% { border-color: rgba(255, 255, 255, 0.6); box-shadow: 0 0 35px rgba(255, 255, 255, 0.4); }
+    }
+    .header {
+      font-size: 2.2em;
+      font-weight: 700;
+      margin-bottom: 15px;
+      letter-spacing: -0.02em;
+      font-family: 'Space Grotesk', sans-serif;
+      text-align: center;
+    }
+    .tagline {
+      font-size: 1.1em;
+      color: var(--highlight);
+      margin-bottom: 30px;
+      text-align: center;
+    }
+    .ronaldo-ascii {
+      white-space: pre;
+      margin: 20px 0;
+      font-size: 8px;
+      text-align: center;
+    }
+    .prompt {
+      color: var(--highlight);
+    }
+    .output {
+      color: var(--text);
+      margin-bottom: 20px;
+      white-space: pre-wrap;
+      font-size: 0.95em;
+    }
+    .command {
+      background: rgba(0, 0, 0, 0.2);
+      padding: 8px 12px;
+      border-radius: 4px;
+      font-family: monospace;
+      margin: 10px 0;
+      display: inline-block;
+      font-size: 0.85em;
+      border: 1px solid var(--stroke);
+      width: 100%;
+    }
+    .btn-shell {
+      background: transparent;
+      border: 1px solid var(--stroke);
+      color: var(--text);
+      font-family: 'Fira Mono', monospace;
+      padding: 12px 20px;
+      margin: 10px 0;
+      border-radius: 4px;
+      text-decoration: none;
+      font-size: 1em;
+      display: block;
+      width: 100%;
+      text-align: center;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      animation: pulse 2.5s infinite;
+      box-shadow: var(--glow);
+    }
+    @keyframes pulse {
+      0%, 100% { box-shadow: var(--glow); opacity: 0.9; }
+      50% { box-shadow: var(--glow-hover); opacity: 1; }
+    }
+    .btn-shell:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--highlight);
+      box-shadow: var(--glow-hover);
+    }
+    .contract {
+      background: rgba(0, 0, 0, 0.2);
+      padding: 12px 16px;
+      margin: 25px 0;
+      border-radius: 4px;
+      border: 1px solid var(--stroke);
+      font-family: monospace;
+      font-size: 0.85em;
+      text-align: center;
+      word-break: break-all;
+    }
+    .goals, .story, .spread, .footer {
+      background: rgba(0, 0, 0, 0.2);
+      padding: 15px;
+      margin: 20px 0;
+      border-radius: 4px;
+      border: 1px solid var(--stroke);
+      font-size: 0.95em;
+    }
+    .goals ul, .story p, .spread p {
+      margin: 0;
+      padding-left: 20px;
+    }
+    .footer {
+      text-align: center;
+font-size: 0.8em;
+      color: #777;
+      margin-top: 40px;
+    }
+    .warn {
+      color: #ff4040;
+      font-weight: 700;
+    }
+  </style>
 </head>
 <body>
-<div class="header">
-<h1>Baby Ronaldo SIUU</h1>
-<p>🚀 The meme-powered coin for the SIUU Army!</p>
-</div>
+  <div class="container">
+    <div class="header">BABY RONALDO SIUU</div>
+    <div class="tagline">🚀 The meme-powered crypto for the SIUU Army</div>
 
-<div class="ronaldo-cartoon" title="Cartoon-Style Ronaldo"></div>
+    <div class="ronaldo-ascii">
+      OOOOOOOOO
+     OO\    /OO
+    OO|    |OO
+    OO|    |OO
+    OO|  CR|OO
+    OO|    |OO
+    OO|    |OO
+     OO\  /OO
+      OOOOOOO
+    </div>
 
-<ul>
-<li>After the pump & breakout: Celebrate & Sell 🎉</li>
-</ul>
+    <div class="command">
+      <span class="prompt">$SIUU@babyronaldo:~/$</span> ls -la
+    </div>
+    <div class="output">drwxr-xr-x  2 root  root  4096 Aug 31 05:00 .<br>drwxr-xr-x  4 root  root  4096 Aug 31 05:00 ..<br>-rw-r--r--  1 root  root   120 Aug 31 05:00 GOALS<br>-rw-r--r--  1 root  root   450 Aug 31 05:00 STORY<br>-rw-r--r--  1 root  root   180 Aug 31 05:00 LINKS<br>-rw-r--r--  1 root  root   100 Aug 31 05:00 CONTRACT</div>
 
-<div>
-<a class="btn" href="https://bonk.fun/token/EuaW1QB3XLFPDZLJi4m63nsZGhqTspVVE2k7b16Rbonk" target="_blank">Buy $SIUU (Bonkfun)</a>
-<a class="btn" href="https://raydium.io/launchpad/token/?mint=EuaW1QB3XLFPDZLJi4m63nsZGhqTspVVE2k7b16Rbonk" target="_blank">Launchpad (Raydium)</a>
-<a class="btn" href="https://phantom.com/tokens/solana/EuaW1QB3XLFPDZLJi4m63nsZGhqTspVVE2k7b16Rbonk" target="_blank">Open Wallet (Phantom)</a>
-<a class="btn" href="https://dexscreener.com/solana/ChbpCu8xcnH6idYw5m1bgNY7BAeJUfEpnjmhJUG2U7sG" target="_blank">Live Chart (DEXScreener)</a>
-<a class="btn" href="https://www.defined.fi/sol/ChbpCu8xcnH6idYw5m1bgNY7BAeJUfEpnjmhJUG2U7sG?quoteToken=token0&cache=07316" target="_blank">Defined.fi</a>
-<a class="btn" href="https://dex.coinmarketcap.com/token/solana/EuaW1QB3XLFPDZLJi4m63nsZGhqTspVVE2k7b16Rbonk/" target="_blank">CoinMarketCap DEX</a>
-<a class="btn" href="https://t.me/babyronaldosiuu" target="_blank">Join Telegram</a>
-</div>
+    <div class="goals">
+      <b>GOALS</b>
+      <ul>
+        <li>Build a strong community</li>
+        <li>Start the real SIUU hype</li>
+        <li>Break through 555M Market Cap</li>
+        <li>Cristiano notices us 👀</li>
+        <li>Enjoy the pump and party with the SIUU Army!</li>
+      </ul>
+    </div>
 
-<div class="contract">
-<b>Contract Address:<br></b>
-EuaW1QB3XLFPDZLJi4m63nsZGhqTspVVE2k7b16Rbonk
-</div>
+    <div class="story">
+      <b>STORY</b>
+      <p>It all started with a meme, a true dream and the SIUU Spirit. Baby Ronaldo $SIUU is the coin for everyone who believes in achieving the impossible – just like Ronaldo: "I'm rich and I say $SIUU!"<br><br>
+      Together we're building the most legendary crypto community. Here, only one thing matters: pump it, hold it, SIUU! 💪</p>
+    </div>
 
-<h2>Our Goals 🎯</h2>
-<ul class="goals">
-<li><b>Goal 1:</b> Build a strong community</li>
-<li><b>Goal 2:</b> Start the real SIUU hype</li>
-<li><b>Goal 3:</b> Break through 555M Market Cap</li>
-<li><b>Goal 4:</b> Cristiano notices us 👀</li>
-<li><b>Ultimate Goal:</b> Enjoy the pump and party with the SIUU Army!</li>
-</ul>
+    <div class="btn-shell" onclick="window.open('https://bonk.fun/token/EuaW1QB3XLFPDZLJi4m63nsZGhqTspVVE2k7b16Rbonk', '_blank')">Buy $SIUU (Bonkfun)</div>
+    <div class="btn-shell" onclick="window.open('https://raydium.io/launchpad/token/?mint=EuaW1QB3XLFPDZLJi4m63nsZGhqTspVVE2k7b16Rbonk', '_blank')">Launchpad (Raydium)</div>
+    <div class="btn-shell" onclick="window.open('https://phantom.com/tokens/solana/EuaW1QB3XLFPDZLJi4m63nsZGhqTspVVE2k7b16Rbonk', '_blank')">Open Wallet (Phantom)</div>
+    <div class="btn-shell" onclick="window.open('https://dexscreener.com/solana/ChbpCu8xcnH6idYw5m1bgNY7BAeJUfEpnjmhJUG2U7sG', '_blank')">Live Chart (DEXScreener)</div>
+    <div class="btn-shell" onclick="window.open('https://www.defined.fi/sol/ChbpCu8xcnH6idYw5m1bgNY7BAeJUfEpnjmhJUG2U7sG?quoteToken=token0&cache=07316', '_blank')">Defined.fi</div>
+    <div class="btn-shell" onclick="window.open('https://dex.coinmarketcap.com/token/solana/EuaW1QB3XLFPDZLJi4m63nsZGhqTspVVE2k7b16Rbonk/', '_blank')">CoinMarketCap DEX</div>
+    <div class="btn-shell" onclick="window.open('https://t.me/babyronaldosiuu', '_blank')">Join Telegram</div>
 
-<h2>Our Story 📖</h2>
-<div class="story-block">
-It all started with a meme, a true dream and the SIUU Spirit. Baby Ronaldo $SIUU is the coin for everyone who believes in achieving the impossible – just like Ronaldo: "I’m rich and I say $SIUU!" <br><br>
-Together we're building the most legendary crypto community. Here, only one thing matters: pump it, hold it, SIUU! 💪
-</div>
+    <div class="contract">
+      <b>CONTRACT_ADDRESS</b><br>
+      EuaW1QB3XLFPDZLJi4m63nsZGhqTspVVE2k7b16Rbonk
+    </div>
 
-<h2>Spread the Word 📡</h2>
-<p>Tag @Cristiano everywhere 🚀<br>#SIUU #BabyRonaldo</p>
+    <div class="spread">
+      <b>SPREAD</b>
+      <p>Tag @Cristiano everywhere 🚀<br>#SIUU #BabyRonaldo</p>
+    </div>
 
-<footer>
-🚨 Not financial advice. Only SIUU, only fun, only memes. <br>
-Copyright 2025 Baby Ronaldo SIUU ©
-</footer>
+    <div class="command">
+      <span class="prompt">$SIUU@babyronaldo:~/$</span><span class="output"> # After the pump & breakout: Celebrate & Sell 🎉</span>
+    </div>
+
+    <div class="footer">
+      <span class="warn">🚨 Not financial advice. Only SIUU, only fun, only memes.</span><br>
+      Copyright 2025 Baby Ronaldo SIUU ©
+    </div>
+  </div>
 </body>
 </html>
